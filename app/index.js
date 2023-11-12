@@ -1,7 +1,9 @@
-import { Text } from 'react-native';
+import { View, Text } from 'react-native'
+import React from 'react'
+import { Redirect } from 'expo-router'
 
-export default function Page() {
+export default function index() {
   return (
-    <Text>Home page</Text>
-  );
+    <Redirect href="/explore" />
+  )
 }
