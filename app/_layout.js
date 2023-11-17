@@ -4,6 +4,7 @@ export default function Layout() {
   return (
     <Stack screenOptions={{headerShown:false}}>
         <Stack.Screen name="(tabs)"/>
+        <Stack.Screen name="image/[id]" options={{presentation: 'modal'}}/>
     </Stack>
   );
 }
