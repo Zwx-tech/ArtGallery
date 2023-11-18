@@ -7,7 +7,6 @@ const blurhash =
 
 const CustomImage = ({ image_id, style }) => {
   const [imageData, setImageData] = useState({});
-  console.log(image_id);
   function fetchImage() {
     fetch(`https://www.artic.edu/iiif/2/${image_id}/info.json`).then((response) => response.json()).then((response) => {
       setImageData({...response});
@@ -16,7 +15,6 @@ const CustomImage = ({ image_id, style }) => {
   useEffect(() => {
       fetchImage();
     }, []);
-    console.log(imageData);
   return !!imageData.sizes ? (
     <Image
       style={{
