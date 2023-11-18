@@ -40,6 +40,14 @@ export default function layout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="ios-settings-outline" color={color} size={size} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

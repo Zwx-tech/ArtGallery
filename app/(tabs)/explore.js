@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
-import { FlashList } from "@shopify/flash-list";
+import { StyleSheet, View, ActivityIndicator, FlatList } from "react-native";
 import ArtworkPreview from "../../components/ArtworkPreview";
 
 const paginationLenght = 12;
@@ -49,7 +48,7 @@ export default function ExplorePage() {
 
   return (
     <View style={{ width: "100%", minHeight: "100%" }}>
-      <FlashList
+      <FlatList
         data={data}
         onEndReachedThreshold={0.5}
         onEndReached={handlePagination}
@@ -57,7 +56,6 @@ export default function ExplorePage() {
         renderItem={({ item, index }) => (
           <ArtworkPreview item={item} id={index}> </ArtworkPreview>
         )}
-        estimatedItemSize={700}
         ListEmptyComponent={
           <View style={styles.spinnerWrapper}>  
             <ActivityIndicator />

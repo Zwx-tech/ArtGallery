@@ -1,11 +1,13 @@
 import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage"; 
-import { useEffect, useState } from "react";
-
+import { useEffect, useState, useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 const { getItem, setItem } = useAsyncStorage('@favorite');
 
 async function checkIsFavorite(id) {
     const favoriteArray = await getFavorites();
-    return favoriteArray.some(item => item.id == id);
+    const result = await favoriteArray.some(item => item.id == id);
+    // await console.log(`${id}: ${result}`);
+    return result
 }
 
 async function getFavorites() {
@@ -30,7 +32,6 @@ async function removefromFavorites(id) {
   } 
   const favoriteArray = await getFavorites();
   const filterFavorites = await favoriteArray.filter(item => item.id != id);
-  console.log(await favoriteArray);
   await setItem(
     JSON.stringify(filterFavorites)
   );
@@ -39,8 +40,9 @@ async function removefromFavorites(id) {
 async function addToFavorites(item) {
     try {
         const favoriteArray = await getFavorites();
+        favoriteArray.push(item)
         await setItem(
-          JSON.stringify([...favoriteArray, item])
+          JSON.stringify(favoriteArray)
         );
       } catch (e) { 
         console.log(e);
@@ -48,10 +50,13 @@ async function addToFavorites(item) {
   }
 
 
-function useFavorite(_item) {
+function useFavorite(item) {
   const [isFavorite, setisFavorite] = useState(false);
-  const [item, setItem] = useState(_item);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    if(loading)
+      return;
     async function helper() {
       if(isFavorite && !await checkIsFavorite(item.id)) {
         await addToFavorites(item);
@@ -63,14 +68,16 @@ function useFavorite(_item) {
     helper();
   }, [isFavorite]);
 
-  useEffect(() => {
-    async function helper() {
-      await setisFavorite(await checkIsFavorite(item.id));
-    }
-    helper();
-  }, []);
-
-  return [isFavorite, setisFavorite]
+  useFocusEffect(
+    useCallback(() => {
+      async function helper() {
+        await setisFavorite(await checkIsFavorite(item.id));
+      }
+      helper();
+      setLoading(false);
+    }, [])
+  );
+  return [isFavorite, setisFavorite];
 }
 
-export { useFavorite }
+export { useFavorite, getFavorites }

@@ -22,6 +22,7 @@ const Modal = () => {
     <View style={styles.wrapper}>
       <CustomImage image_id={data.image_id} style={styles.img}></CustomImage>
       <Text>{data.title}</Text>
+      <Text>{data.id}</Text>
     </View>
   ): (
     <View style={styles.spinnerWrapper}>
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 
   },
   img: {
-    width: "90%",
+    width: "100%",
     marginLeft: "auto",
     marginRight: "auto"
   }

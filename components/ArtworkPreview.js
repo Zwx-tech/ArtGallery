@@ -22,8 +22,6 @@ const ArtworkPreview = ({ item, id }) => {
   const doubleTapRef = useRef();
   const scale = useSharedValue(0);
   const [isFavorite, setIsFavorite] = useFavorite(item);
-  // const [isFavorite, setIsFavorite] = useState(false);
-  console.log(item);
   const animatedStyles = useAnimatedStyle(() => ({
     transform: [{ scale: Math.min(Math.max(scale.value, 0), 1) }],
   }));
@@ -53,7 +51,7 @@ const ArtworkPreview = ({ item, id }) => {
         onActivated={() => router.push(`/image/${item.id}`)}
       >
         <TapGestureHandler
-          maxDelay={250}
+          maxDelay={350}
           ref={doubleTapRef}
           numberOfTaps={2}
           onActivated={() => {
