@@ -1,11 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { Image } from 'expo-image';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { router } from 'expo-router';
 import React from 'react';
-import { Link } from 'expo-router';
-
-const blurhash =
-  '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
-
+import CustomImage from './CustomImage';
 
 const ArtworkPreview = ({ item, id }) => {
     let w, h;
@@ -16,17 +12,10 @@ const ArtworkPreview = ({ item, id }) => {
     }
     return (
         <View key={id}>
-          <Link
-            href={`image/${item.id}`}
-          >
-            <Image
-              style={{aspectRatio: `${w} / ${h}`, ...styles.img}}
-              source={{uri: `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`}}
-              contentFit='cover'
-              placeholder={blurhash}
-              />
+          <Pressable onPress={() => router.push(`/image/${item.id}`)}>
+            <CustomImage image_id={item.image_id} style={styles.img}></CustomImage>
             <Text>{item.title}</Text>
-          </Link>
+          </Pressable>
       </View>
     )
 }

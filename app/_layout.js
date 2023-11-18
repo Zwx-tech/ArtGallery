@@ -1,10 +1,20 @@
-import { Stack } from "expo-router"
-
+import { Stack } from "expo-router";
 export default function Layout() {
   return (
-    <Stack screenOptions={{headerShown:false}}>
-        <Stack.Screen name="(tabs)"/>
-        <Stack.Screen name="image/[id]" options={{presentation: 'modal'}}/>
+    <Stack screenOptions={{}}>
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="image/[id]"
+        options={{
+          title: "Image",
+          presentation: "modal"
+        }}
+      />
     </Stack>
   );
 }
