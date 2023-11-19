@@ -5,6 +5,7 @@ import CustomImage from "./CustomImage";
 import { Ionicons } from "@expo/vector-icons";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { Dimensions } from "react-native";
+
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -91,7 +92,7 @@ const ArtworkPreview = ({ item, id }) => {
 const styles = StyleSheet.create({
   img: {
     marginHorizontal: "auto",
-    maxHeight: 600,
+    // maxHeight: 600,
     width: "100%",
     objectFit: "cover",
   },
