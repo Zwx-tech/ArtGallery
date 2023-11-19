@@ -39,7 +39,7 @@ export default function ExplorePage() {
       })
       .then(() => {
         setLoading(false);
-      });
+      }).catch(e => console.log(e));
   }
 
   useEffect(() => {

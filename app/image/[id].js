@@ -26,7 +26,7 @@ const Modal = () => {
         medium: response.data.medium_display,
         is_zoomable: response.data.is_zoomable
       });
-    });
+    }).catch(e => console.log(e));
   }
 
   useEffect(() => {

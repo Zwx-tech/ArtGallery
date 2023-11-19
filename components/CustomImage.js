@@ -11,7 +11,7 @@ const CustomImage = ({ image_id, style, is_zoomable=false }) => {
   function fetchImage() {
     fetch(`https://www.artic.edu/iiif/2/${image_id}/info.json`).then((response) => response.json()).then((response) => {
       setImageData({...response});
-    });
+    }).catch(e => console.log(e));
   }
   useEffect(() => {
       fetchImage();
