@@ -17,8 +17,6 @@ export default function ExplorePage() {
     async function helper() {
       await setData(await getFavorites());
       await setLoading(false);
-      // await console.log([...(await getFavorites())].length);
-      // await console.log([...(await getFavorites())].map((item) => item.id));
       console.log("Zmiana ekranu");
     }
     helper();

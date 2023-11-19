@@ -20,9 +20,6 @@ export default function ExplorePage() {
   }
 
   function handleTextInput(value) {
-    setEndReached(false)
-    setData([])
-    setPage(1)
     setQuery(value)
   }
 
@@ -72,6 +69,9 @@ export default function ExplorePage() {
   
   useEffect(() => {
     const timeoutID = setTimeout(() => {
+      setEndReached(false)
+      setData([])
+      setPage(1)
       fetchData();
     })
     return () => {
@@ -123,7 +123,10 @@ const styles = StyleSheet.create({
   },
   search: {
     height: 40,
-    margin: 12,
+    borderRadius: 5,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginVertical: 10,
     borderWidth: 1,
     padding: 10,
     width: '90%', 

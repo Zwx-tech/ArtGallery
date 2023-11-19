@@ -39,7 +39,8 @@ export default function ExplorePage() {
       })
       .then(() => {
         setLoading(false);
-      }).catch(e => console.log(e));
+      })
+      .catch((e) => console.log(e));
   }
 
   useEffect(() => {
@@ -54,10 +55,12 @@ export default function ExplorePage() {
         onEndReached={handlePagination}
         keyExtractor={(item) => item.id}
         renderItem={({ item, index }) => (
-          <ArtworkPreview item={item} id={index}> </ArtworkPreview>
+          <ArtworkPreview item={item} id={index}>
+            {" "}
+          </ArtworkPreview>
         )}
         ListEmptyComponent={
-          <View style={styles.spinnerWrapper}>  
+          <View style={styles.spinnerWrapper}>
             <ActivityIndicator />
           </View>
         }

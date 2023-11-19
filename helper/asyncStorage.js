@@ -1,4 +1,4 @@
-import AsyncStorage, { useAsyncStorage } from "@react-native-async-storage/async-storage"; 
+import { useAsyncStorage } from "@react-native-async-storage/async-storage"; 
 import { useEffect, useState, useCallback } from "react";
 import { useFocusEffect } from "expo-router";
 const { getItem, setItem } = useAsyncStorage('@favorite');
@@ -6,7 +6,6 @@ const { getItem, setItem } = useAsyncStorage('@favorite');
 async function checkIsFavorite(id) {
     const favoriteArray = await getFavorites();
     const result = await favoriteArray.some(item => item.id == id);
-    // await console.log(`${id}: ${result}`);
     return result
 }
 
@@ -58,9 +57,11 @@ function useFavorite(item) {
     if(loading)
       return;
     async function helper() {
+      // adding to storage
       if(isFavorite && !await checkIsFavorite(item.id)) {
         await addToFavorites(item);
       }
+      // removing from storage
       if(!isFavorite && await checkIsFavorite(item.id)) {
         await removefromFavorites(item.id);
       }
@@ -68,6 +69,7 @@ function useFavorite(item) {
     helper();
   }, [isFavorite]);
 
+  // check if item is favorite 
   useFocusEffect(
     useCallback(() => {
       async function helper() {
